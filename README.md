@@ -5,7 +5,10 @@
 ## Clone Project
 
 use this command to clone the project:
-``` git clone https://github.com/amiralighafouri81/TA-Mangement-Back.git ```
+
+  ```bash
+  git clone https://github.com/amiralighafouri81/TA-Mangement-Back.git
+  ``` 
 
 ---
 
