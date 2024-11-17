@@ -15,25 +15,37 @@ use this command to clone the project:
 ## Activate Virtual Environment
 
 create a vitual environment:
-``` python -m venv venv ```
+  ```bash
+  python -m venv venv
+  ```
 activate your venv on windows:
-``` venv/Scripts/activate ```
+  ```bash
+  venv/Scripts/activate
+  ```
 on mac/linux:
-``` source venv/bin/activate ```
+  ```bash
+  source venv/bin/activate
+  ```
 
 ---
 
 ## Install Dependencies
 
 use this command to install all dependencies:
-``` pip install -r requirements.txt ```
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 ---
 
 ## Run Project
 
 use this command to run the project:
-``` py manage.py runserver ```
+  ```bash
+  py manage.py runserver
+  ```
 
 in this endpoint you can test API's:
-``` http://127.0.0.1:8000/api/v1/swagger/schema/ ```
+  ```bash
+  http://127.0.0.1:8000/api/v1/swagger/schema/
+  ```
