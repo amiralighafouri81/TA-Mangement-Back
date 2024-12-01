@@ -83,7 +83,14 @@ WSGI_APPLICATION = 'TAmanagement.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'TAmanagement',
+        'HOST' : 'localhost',
+        'USER': 'root',
+        'PASSWORD': '47714771Abbas$',
+    },
+    'default-2': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME', 'django_db'),
         'USER': os.getenv('DB_USER', 'django_user'),
@@ -91,33 +98,27 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST', 'db'),
         'PORT': os.getenv('DB_PORT', '3306'),
     },
-    'default-2': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'TAmanagement',
-        'HOST' : 'localhost',
-        'USER': 'root',
-        'PASSWORD': '47714771Abbas$',
-    }
+
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     },
+# ]
 
 
 # Internationalization
