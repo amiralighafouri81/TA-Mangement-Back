@@ -2,23 +2,26 @@ from django.db import models
 from django.conf import settings
 
 class Student(models.Model):
-    ENTRANCE_YEAR_1399 = 1399
-    ENTRANCE_YEAR_1400 = 1400
-    ENTRANCE_YEAR_1401 = 1401
-    ENTRANCE_YEAR_1402 = 1402
-    ENTRANCE_YEAR_1403 = 1403
-    ENTRANCE_YEAR_CHOICES = [
-        (ENTRANCE_YEAR_1399, 1399),
-        (ENTRANCE_YEAR_1400, 1400),
-        (ENTRANCE_YEAR_1401, 1401),
-        (ENTRANCE_YEAR_1402, 1402),
-        (ENTRANCE_YEAR_1403, 1403)
-    ]
+    # ENTRANCE_YEAR_1399 = 1399
+    # ENTRANCE_YEAR_1400 = 1400
+    # ENTRANCE_YEAR_1401 = 1401
+    # ENTRANCE_YEAR_1402 = 1402
+    # ENTRANCE_YEAR_1403 = 1403
+    # ENTRANCE_YEAR_CHOICES = [
+    #     (ENTRANCE_YEAR_1399, 1399),
+    #     (ENTRANCE_YEAR_1400, 1400),
+    #     (ENTRANCE_YEAR_1401, 1401),
+    #     (ENTRANCE_YEAR_1402, 1402),
+    #     (ENTRANCE_YEAR_1403, 1403)
+    # ]
     # first_name = models.CharField(max_length=50)
     # last_name = models.CharField(max_length=50)
     # email = models.EmailField()
-    entrance_year = models.IntegerField(choices=ENTRANCE_YEAR_CHOICES, default=ENTRANCE_YEAR_1400)
+    # entrance_year = models.IntegerField(choices=ENTRANCE_YEAR_CHOICES, default=ENTRANCE_YEAR_1400)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    student_number = models.CharField(max_length=10, unique=True)
+    # resume_link
+    biography = models.TextField()
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -37,6 +40,9 @@ class Instructor(models.Model):
     # last_name = models.CharField(max_length=50)
     # email = models.EmailField()
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    staff_id = models.CharField(max_length=10, unique=True)
+    way_of_communication = models.TextField()
+    research_fields = models.TextField()
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
@@ -49,3 +55,8 @@ class Instructor(models.Model):
 
     class Meta:
         ordering = ["id"]
+
+class Course(models.Model):
+    semester = models.IntegerField()
+    instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT)
+    name = models.CharField(max_length=100)

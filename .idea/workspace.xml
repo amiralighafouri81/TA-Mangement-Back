@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="" />
+    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/core/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0002_alter_instructor_options_student.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0003_remove_instructor_email_remove_instructor_first_name_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +45,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "D:/University/term 7/SE/TA-Mangement-Back",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
