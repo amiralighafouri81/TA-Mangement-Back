@@ -6,20 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/core/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0002_alter_instructor_options_student.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/migrations/0003_remove_instructor_email_remove_instructor_first_name_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/core/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/apps.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/faculty/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -42,20 +39,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/University/term 7/SE/TA-Mangement-Back",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/University/term 7/SE/TA-Mangement-Back&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="TA-Mangement-Back" />
@@ -114,6 +112,9 @@
       <workItem from="1732871660605" duration="124000" />
       <workItem from="1732949889303" duration="586000" />
       <workItem from="1733065966217" duration="8375000" />
+      <workItem from="1733843973049" duration="6187000" />
+      <workItem from="1733905442719" duration="5474000" />
+      <workItem from="1733937235678" duration="975000" />
     </task>
     <servers />
   </component>
