@@ -23,6 +23,9 @@ class UserCreateSerializer(BaseUserCreateSerializer):
     def create(self, validated_data):
         user = super().create(validated_data)
 
+        user.role = User.STUDENT  # Set role to 'Student'
+        user.save()
+
         if self.student_number:
             Student.objects.create(user=user, student_number=self.student_number)
 

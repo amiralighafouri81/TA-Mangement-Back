@@ -10,7 +10,7 @@ class StudentSerializer(serializers.ModelSerializer):
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ['id','first_name','last_name', 'user_id', 'staff_id ']
+        fields = ['id','first_name','last_name', 'user_id', 'staff_id']
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
