@@ -12,9 +12,3 @@ class InstructorAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'staff_id')
     list_per_page = 10
     search_fields = ['user__first_name__istartswith', 'user__last_name__istartswith']
-
-@admin.register(models.Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'semester', 'instructor')
-    list_per_page = 10
-    search_fields = ['name__istartswith']

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'djoser',
     'faculty',
     'core',
+    'course',
 ]
 
 MIDDLEWARE = [
