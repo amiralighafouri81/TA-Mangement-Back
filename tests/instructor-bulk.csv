@@ -1,0 +1,4 @@
+username,first_name,last_name,email,staff_id,way_of_communication,research_fields
+jdoe,John,Doe,jdoe@example.com,12345,"Email, Phone","Machine Learning, AI"
+asmith,Alice,Smith,asmith@example.com,67890,"Office Hours, Email","Data Science, Big Data"
+
