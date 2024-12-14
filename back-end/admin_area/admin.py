@@ -42,6 +42,11 @@ def add_bulk_upload_functionality(admin_class):
                                 "role": User.INSTRUCTOR,  # Assuming role field exists
                             },
                         )
+
+                        # Set the password only if it is provided in the CSV
+                        if "password" in row and row["password"]:
+                            user.set_password(row["password"])
+                            user.save()
                         if not user_created and user.role != User.INSTRUCTOR:
                             raise ValidationError(f"User {user.username} exists but is not an instructor.")
                         
