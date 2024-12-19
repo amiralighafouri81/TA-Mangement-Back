@@ -1,5 +1,6 @@
 # Use an official Python image as the base
 FROM python:3.11-bullseye
+ENV PYTHONUNBUFFERED=1
 # Set the working directory
 WORKDIR /app
 
@@ -17,7 +18,9 @@ RUN apt-get update && apt-get install -y \
 
 # Copy the rest of the application code
 COPY ./back-end/ .
-
+COPY ./entrypoint.sh .
 # Default command to run the server
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+EXPOSE 8000
+CMD ["sh", "-c", "./entrypoint.sh"]
 
