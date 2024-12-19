@@ -83,19 +83,12 @@ WSGI_APPLICATION = 'TAmanagement.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'TAmanagement',
-        'HOST' : 'localhost',
-        'USER': 'root',
-        'PASSWORD': '47714771Abbas$',
-    },
-    'default-2': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'django_db'),
-        'USER': os.getenv('DB_USER', 'django_user'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'django_password'),
-        'HOST': os.getenv('DB_HOST', 'db'),
+        'NAME': os.getenv('DB_NAME', 'TAmanagement'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '47714771Abbas$'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '3306'),
     },
 
