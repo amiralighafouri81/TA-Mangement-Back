@@ -1,27 +1,13 @@
 version: '3.8'
 
 services:
-  web:
+  django:
     build:
       context: .
-    container_name: django_web
-    command: sh -c 'sleep 90 ; python3 manage.py runserver 0.0.0.0:8000'
+    container_name: django
+    command: sh -c './entrypoint.sh'
     ports:
       - "8000:8000"
-    environment:
-      #DJANGO_SETTINGS_MODULE: django_project.settings
-      DB_HOST: db
-      DB_NAME: django_db
-      DB_USER: django_user
-      DB_PASSWORD: django_password
-    depends_on:
-      - db
-
-  migrate:
-    build:
-      context: .
-    container_name: django_migrate
-    command: sh -c 'sleep 40 ; python3 manage.py migrate'
     environment:
       #DJANGO_SETTINGS_MODULE: django_project.settings
       DB_HOST: db
