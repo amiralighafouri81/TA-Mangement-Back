@@ -3,6 +3,6 @@ from rest_framework_nested import routers
 from . import views
 
 urlpatterns = [
-    path('courses/', views.course_list),
-    path('courses/<int:id>/', views.course_detail),
+    path('courses/', views.CourseList.as_view()),
+    path('courses/<int:id>/', views.CourseDetail.as_view()),
 ]

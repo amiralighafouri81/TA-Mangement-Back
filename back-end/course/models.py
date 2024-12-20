@@ -6,5 +6,5 @@ class Course(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT)
     name = models.CharField(max_length=100)
     # headTARef
-    condition = models.TextField()
+    condition = models.TextField(null = True)
 
