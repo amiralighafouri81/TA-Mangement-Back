@@ -53,7 +53,7 @@ jobs:
           set -xe
           echo "Waiting for Django app to become healthy..."
           for i in {1..15}; do
-            if docker-compose exec django curl -f http://localhost:8000/ 2>/dev/stdout ; then
+            if docker-compose exec -T django curl -f http://localhost:8000/ 2>/dev/stdout ; then
               echo "Django app is healthy!"
               break
             fi
