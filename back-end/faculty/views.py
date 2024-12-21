@@ -7,6 +7,10 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from .models import Student, Instructor
 from .serializers import StudentSerializer, InstructorSerializer
+from rest_framework.views import APIView
+
+# class ProductList(APIView):
+    
 
 @api_view()
 def student_list(request):

@@ -1,10 +1,9 @@
 from django.urls import path
-from rest_framework_nested import routers
 from . import views
 
 urlpatterns = [
-    path('students/', views.student_list),
-    path('students/<int:id>/', views.student_detail),
-    path('instructors/', views.instructor_list),
-    path('instructors/<int:id>/', views.instructor_detail),
+    path('students/', views.student_list, name='student-list'),
+    path('students/<int:id>/', views.student_detail, name='student-detail'),
+    path('instructors/', views.instructor_list, name='instructor-list'),
+    path('instructors/<int:id>/', views.instructor_detail, name='instructor-detail'),
 ]
