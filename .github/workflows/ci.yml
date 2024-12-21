@@ -50,10 +50,10 @@ jobs:
       # Step 5: Wait for Django app to be healthy
       - name: Wait for Django app to be ready
         run: |
-          set -e
+          set -xe
           echo "Waiting for Django app to become healthy..."
           for i in {1..15}; do
-            if docker-compose exec django curl -f http://localhost:8000/admin/ ; then
+            if docker-compose exec django curl -f http://localhost:8000/ 2>/dev/stdout ; then
               echo "Django app is healthy!"
               break
             fi
