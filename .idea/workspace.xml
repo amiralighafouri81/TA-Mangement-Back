@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/course/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

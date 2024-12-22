@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('faculty/', include('faculty.urls')),
     path('course/', include('course.urls')),
+    path('request/', include('request.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('api/v1/',  # Added trailing slash
