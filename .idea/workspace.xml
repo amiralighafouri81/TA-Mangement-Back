@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="">
+    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/course/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/request/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/course/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/course/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/course/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/request/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,6 +132,8 @@
       <workItem from="1734081025334" duration="11960000" />
       <workItem from="1734647384084" duration="370000" />
       <workItem from="1734690526220" duration="1703000" />
+      <workItem from="1734889597993" duration="227000" />
+      <workItem from="1734889843373" duration="304000" />
     </task>
     <servers />
   </component>

@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
-urlpatterns = [
-    path('students/', views.student_list, name='student-list'),
-    path('students/<int:id>/', views.student_detail, name='student-detail'),
-    path('instructors/', views.instructor_list, name='instructor-list'),
-    path('instructors/<int:id>/', views.instructor_detail, name='instructor-detail'),
-]
+
+router = DefaultRouter()
+router.register('students', views.StudentViewSet)
+router.register('instructors', views.InstructorViewSet)
+urlpatterns = router.urls

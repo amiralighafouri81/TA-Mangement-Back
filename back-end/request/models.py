@@ -13,7 +13,7 @@ class Request(models.Model):
     ]
     course = models.ForeignKey('course.Course', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default=REQUSET_STATUS_PENDING)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
 
     def __str__(self):
