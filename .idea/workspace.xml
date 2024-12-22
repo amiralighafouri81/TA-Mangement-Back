@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test" />
+    <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/course/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +124,7 @@
       <workItem from="1734647384084" duration="370000" />
       <workItem from="1734690526220" duration="1703000" />
       <workItem from="1734889597993" duration="227000" />
-      <workItem from="1734889843373" duration="662000" />
+      <workItem from="1734889843373" duration="1641000" />
     </task>
     <servers />
   </component>
