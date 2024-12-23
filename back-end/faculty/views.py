@@ -4,42 +4,47 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
-from .models import Student, Instructor, Course
-from .serializers import StudentSerializer, InstructorSerializer, CourseSerializer
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
+from .models import Student, Instructor
+from .serializers import StudentSerializer, InstructorSerializer
+from rest_framework.views import APIView
 
-@api_view()
-def student_list(request):
+# @api_view()
+# def student_list(request):
+#     queryset = Student.objects.all()
+#     serializer = StudentSerializer(queryset, many=True)
+#     return Response(serializer.data)
+#
+# @api_view()
+# def student_detail(request, id):
+#     student = get_object_or_404(Student, pk=id)
+#     serializer = StudentSerializer(student)
+#     return Response(serializer.data)
+#
+#
+# @api_view()
+# def instructor_list(request):
+#     queryset = Instructor.objects.all()
+#     serializer = InstructorSerializer(queryset, many=True)
+#     return Response(serializer.data)
+#
+# @api_view()
+# def instructor_detail(request, id):
+#     instructor = get_object_or_404(Instructor, pk=id)
+#     serializer = InstructorSerializer(instructor)
+#     return Response(serializer.data)
+
+
+class StudentViewSet(ModelViewSet):
     queryset = Student.objects.all()
-    serializer = StudentSerializer(queryset, many=True)
-    return Response(serializer.data)
+    serializer_class = StudentSerializer
 
-@api_view()
-def student_detail(request, id):
-    student = get_object_or_404(Student, pk=id)
-    serializer = StudentSerializer(student)
-    return Response(serializer.data)
+    def get_serializer_context(self):
+        return {'request': self.request}
 
-@api_view()
-def instructor_list(request):
+class InstructorViewSet(ModelViewSet):
     queryset = Instructor.objects.all()
-    serializer = InstructorSerializer(queryset, many=True)
-    return Response(serializer.data)
+    serializer_class = InstructorSerializer
 
-@api_view()
-def instructor_detail(request, id):
-    instructor = get_object_or_404(Instructor, pk=id)
-    serializer = InstructorSerializer(instructor)
-    return Response(serializer.data)
-
-@api_view()
-def course_list(request):
-    queryset = Course.objects.all()
-    serializer = CourseSerializer(queryset, many=True)
-    return Response(serializer.data)
-
-@api_view()
-def course_detail(request, id):
-    course = get_object_or_404(Course, pk=id)
-    serializer = CourseSerializer(course)
-    return Response(serializer.data)
+    def get_serializer_context(self):
+        return {'request': self.request}

@@ -1,6 +1,6 @@
 from django.urls import path
-from rest_framework_nested import routers
 from . import views
+from rest_framework.routers import SimpleRouter, DefaultRouter
 
 urlpatterns = [
     path('students/', views.student_list),
@@ -11,3 +11,8 @@ urlpatterns = [
     path('courses/<int:id>/', views.course_detail),
 
 ]
+
+router = DefaultRouter()
+router.register('students', views.StudentViewSet)
+router.register('instructors', views.InstructorViewSet)
+urlpatterns = router.urls
