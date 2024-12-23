@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     'faculty',
     'core',
     'admin_area',
+    'course',
+    'request',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +110,10 @@ DATABASES = {
     #    'HOST': os.getenv('DB_HOST', 'db'),
     #    'PORT': os.getenv('DB_PORT', '3306'),
     #},
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # },
 
 }
 
