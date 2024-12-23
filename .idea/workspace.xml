@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +124,7 @@
       <workItem from="1734690526220" duration="1703000" />
       <workItem from="1734889597993" duration="227000" />
       <workItem from="1734889843373" duration="3751000" />
-      <workItem from="1734938449452" duration="1311000" />
+      <workItem from="1734938449452" duration="3205000" />
     </task>
     <servers />
   </component>
