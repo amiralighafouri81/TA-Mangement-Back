@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/course/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/course/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/request/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/request/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,21 +45,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/University/term 7/SE/TA-Mangement-Back",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/University/term 7/SE/TA-Mangement-Back&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="TA-Mangement-Back" />
@@ -124,7 +126,8 @@
       <workItem from="1734647384084" duration="370000" />
       <workItem from="1734690526220" duration="1703000" />
       <workItem from="1734889597993" duration="227000" />
-      <workItem from="1734889843373" duration="1641000" />
+      <workItem from="1734889843373" duration="3751000" />
+      <workItem from="1734938449452" duration="1311000" />
     </task>
     <servers />
   </component>
