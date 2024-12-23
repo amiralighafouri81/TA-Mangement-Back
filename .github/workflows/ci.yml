@@ -1,1 +1,75 @@
+name: Django CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+      - *
+
+  pull_request:
+
+jobs:
+  continue-integration:
+    runs-on: ubuntu-latest
+
+      #services:
+      #  db:
+      #    image: postgres:15
+      #    ports:
+      #      - 5432:5432
+      #    env:
+      #      POSTGRES_USER: testuser
+      #      POSTGRES_PASSWORD: testpassword
+      #      POSTGRES_DB: testdb
+      #    options: >-
+      #      --health-cmd="pg_isready -U testuser -d testdb"
+      #      --health-interval=10s
+      #      --health-timeout=5s
+      #      --health-retries=3
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install Docker Compose
+      - name: Set up Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      # Step 4: Build and start services using docker-compose
+      - name: Build and start Docker services
+        run: docker-compose up -d --build
+
+      # Step 5: Wait for Django app to be healthy
+      - name: Wait for Django app to be ready
+        run: |
+          set -xe
+          echo "Waiting for Django app to become healthy..."
+          for i in {1..15}; do
+            if docker-compose exec -T django curl -f http://localhost:8000/admin 2>/dev/stdout ; then
+              echo "Django app is healthy!"
+              break
+            fi
+            echo "Django app is not ready yet. Retrying in 5 seconds..."
+            sleep 5
+            if [ $i -eq 15 ]; then
+              echo "Django app failed to start in time."
+              docker logs django
+              docker logs mysql_db
+              exit 1
+            fi
+          done
+
+      # Step 6: Run Django unit tests
+      #- name: Run tests
+      #  run: docker-compose exec web python manage.py test
 
