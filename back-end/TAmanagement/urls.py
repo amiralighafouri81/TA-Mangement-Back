@@ -19,6 +19,7 @@ admin.AdminSite.site_header = "TA Management Admin"
 admin.AdminSite.index_title = "Admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('admin/', 'admin_area.urls'),
     path('faculty/', include('faculty.urls')),
     path('course/', include('course.urls')),
     path('request/', include('request.urls')),
