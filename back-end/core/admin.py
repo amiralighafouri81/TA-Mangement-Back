@@ -14,5 +14,5 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
     )
-    list_display = ("username", "first_name", "last_name", "role", "is_staff")
+    list_display = ("id", "username", "first_name", "last_name", "role", "is_staff")
 

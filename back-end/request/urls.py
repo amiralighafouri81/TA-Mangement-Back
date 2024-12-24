@@ -4,5 +4,5 @@ from . import views
 
 
 router = DefaultRouter()
-router.register('requests', views.RequestViewSet)
+router.register('requests', views.RequestViewSet, basename='requests')
 urlpatterns = router.urls

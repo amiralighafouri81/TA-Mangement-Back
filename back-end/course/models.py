@@ -25,5 +25,5 @@ class Course(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.name} - Semester: {self.semester} - Instructor: {self.instructor}"
+        return f"{self.name} - {self.instructor} - Semester: {self.semester} "
 
