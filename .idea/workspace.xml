@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9d0de78-9454-470e-a3d1-875e95045b01" name="Changes" comment="update unit test">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_23_2024_4_11_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_23_2024_4_11_PM_[Changes]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_23_2024_4_11_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/static/admin_area/css/admin_styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/templates/admin/bulk_upload.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/templates/admin/bulk_upload_instructors.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/templates/admin/faculty/instructor/change_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/admin_area/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/instructor-bulk.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TA-Mangement-Back.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TA-Mangement-Back.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0998d452-68dc-4bc0-a449-5d7b587d9cf4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0998d452-68dc-4bc0-a449-5d7b587d9cf4.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/TAmanagement/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/faculty/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/core/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/core/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/core/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/core/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/core/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/faculty/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/faculty/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +35,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "amiralighafouri81"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/amiralighafouri81/TA-Mangement-Back.git",
+    "accountId": "5f82d910-e75b-406e-85a8-151e447c8005"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -69,7 +62,7 @@
   "keyToString": {
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "profile",
     "last_opened_file_path": "D:/University/term 7/SE/TA-Mangement-Back",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -150,7 +143,7 @@
       <workItem from="1734938449452" duration="3205000" />
       <workItem from="1734979506585" duration="1265000" />
       <workItem from="1735048260234" duration="956000" />
-      <workItem from="1735049236640" duration="321000" />
+      <workItem from="1735049236640" duration="4036000" />
     </task>
     <servers />
   </component>
