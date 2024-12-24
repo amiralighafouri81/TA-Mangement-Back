@@ -1,13 +1,6 @@
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from .models import Student, Instructor
 from .serializers import StudentSerializer, InstructorSerializer
-from rest_framework.views import APIView
 
 # @api_view()
 # def student_list(request):

@@ -33,14 +33,39 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 
 
 class UserSerializer(BaseUserSerializer):
+    student_number = serializers.CharField(required=False, allow_null=True)
+    biography = serializers.CharField(required=False, allow_null=True)
+    staff_id = serializers.CharField(required=False, allow_null=True)
+    way_of_communication = serializers.CharField(required=False, allow_null=True)
+    research_fields = serializers.CharField(required=False, allow_null=True)
+
     class Meta(BaseUserSerializer.Meta):
-        fields = ['username', 'first_name', 'last_name', 'role']  # Include role for clarity
+        fields = [
+            'username', 'first_name', 'last_name', 'role',  # Base fields
+            'student_number', 'biography',  # Student fields
+            'staff_id', 'way_of_communication', 'research_fields'  # Instructor fields
+        ]
+        read_only_fields = ['role']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Dynamically remove irrelevant fields based on the user's role
+        instance = self.instance
+
+        if instance and hasattr(instance, 'role'):
+            if instance.role == User.STUDENT:
+                # Remove instructor-specific fields
+                self.fields.pop('staff_id', None)
+                self.fields.pop('way_of_communication', None)
+                self.fields.pop('research_fields', None)
+            elif instance.role == User.INSTRUCTOR:
+                # Remove student-specific fields
+                self.fields.pop('student_number', None)
+                self.fields.pop('biography', None)
 
     def to_representation(self, instance):
-        # Get the default representation
         representation = super().to_representation(instance)
 
-        # Add student-specific fields if the user is a student
         if instance.role == User.STUDENT:
             try:
                 student = Student.objects.get(user=instance)
@@ -54,7 +79,6 @@ class UserSerializer(BaseUserSerializer):
                     'biography': None,
                 })
 
-        # Add instructor-specific fields if the user is an instructor
         elif instance.role == User.INSTRUCTOR:
             try:
                 instructor = Instructor.objects.get(user=instance)
@@ -71,3 +95,48 @@ class UserSerializer(BaseUserSerializer):
                 })
 
         return representation
+
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.save()
+
+        if instance.role == User.STUDENT:
+            student_data = {
+                'student_number': validated_data.get('student_number'),
+                'biography': validated_data.get('biography'),
+            }
+            student, created = Student.objects.get_or_create(user=instance)
+            for field, value in student_data.items():
+                if value is not None:
+                    setattr(student, field, value)
+            student.save()
+
+        elif instance.role == User.INSTRUCTOR:
+            instructor_data = {
+                'staff_id': validated_data.get('staff_id'),
+                'way_of_communication': validated_data.get('way_of_communication'),
+                'research_fields': validated_data.get('research_fields'),
+            }
+            instructor, created = Instructor.objects.get_or_create(user=instance)
+            for field, value in instructor_data.items():
+                if value is not None:
+                    setattr(instructor, field, value)
+            instructor.save()
+
+        return instance
+
+    def validate(self, attrs):
+        role = self.instance.role if self.instance else attrs.get('role', None)
+
+        if role == User.STUDENT:
+            if 'student_number' not in attrs and self.instance:
+                attrs['student_number'] = getattr(self.instance, 'student_number', None)
+        elif role == User.INSTRUCTOR:
+            if 'staff_id' not in attrs and self.instance:
+                attrs['staff_id'] = getattr(self.instance, 'staff_id', None)
+        return attrs
+
+
+
