@@ -4,22 +4,6 @@ from django.core.exceptions import ValidationError
 from core.models import User
 
 class Student(models.Model):
-    # ENTRANCE_YEAR_1399 = 1399
-    # ENTRANCE_YEAR_1400 = 1400
-    # ENTRANCE_YEAR_1401 = 1401
-    # ENTRANCE_YEAR_1402 = 1402
-    # ENTRANCE_YEAR_1403 = 1403
-    # ENTRANCE_YEAR_CHOICES = [
-    #     (ENTRANCE_YEAR_1399, 1399),
-    #     (ENTRANCE_YEAR_1400, 1400),
-    #     (ENTRANCE_YEAR_1401, 1401),
-    #     (ENTRANCE_YEAR_1402, 1402),
-    #     (ENTRANCE_YEAR_1403, 1403)
-    # ]
-    # first_name = models.CharField(max_length=50)
-    # last_name = models.CharField(max_length=50)
-    # email = models.EmailField()
-    # entrance_year = models.IntegerField(choices=ENTRANCE_YEAR_CHOICES, default=ENTRANCE_YEAR_1400)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     student_number = models.CharField(max_length=10, unique=True)
     # resume_link
