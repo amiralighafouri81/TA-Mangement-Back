@@ -5,11 +5,11 @@ from faculty.models import Student
 class Request(models.Model):
     REQUSET_STATUS_PENDING = 'pending'
     REQUSET_STATUS_ACCEPTED = 'accepted'
-    REQUSET_STATUS_DENIED = 'denied'
+    REQUSET_STATUS_DECLINED = 'declined'
     PAYMENT_STATUS_CHOICES = [
         (REQUSET_STATUS_PENDING, 'Pending'),
         (REQUSET_STATUS_ACCEPTED, 'Accepted'),
-        (REQUSET_STATUS_DENIED, 'Denied')
+        (REQUSET_STATUS_DECLINED, 'Declined')
     ]
     course = models.ForeignKey('course.Course', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default=REQUSET_STATUS_PENDING)
