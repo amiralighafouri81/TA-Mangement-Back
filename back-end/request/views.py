@@ -35,9 +35,9 @@ class RequestViewSet(ModelViewSet):
             # Get all courses taught by the current instructor
             instructor = Instructor.objects.get(user=user)
             courses = instructor.course_set.all()  # All courses where the instructor is teaching
-
-            # Get all requests associated with these courses
-            return Request.objects.filter(course__in=courses)
+            # Get all requests associated with these courses, excluding declined requests
+            return Request.objects.filter(course__in=courses).exclude(status=Request.REQUSET_STATUS_DECLINED)
+            # For other roles (admin, student), show all requests or adjust as necessary
 
     def get_serializer_context(self):
         return {'request': self.request}
