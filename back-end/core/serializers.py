@@ -139,4 +139,3 @@ class UserSerializer(BaseUserSerializer):
         return attrs
 
 
-

@@ -5,13 +5,13 @@ from .models import Student, Instructor
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['first_name','last_name', 'student_number', 'biography']
+        fields = ['id', 'first_name','last_name', 'student_number', 'biography']
         read_only_fields = ['student_number', 'biography']
 
 class SimpleStudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['first_name','last_name', 'student_number']
+        fields = ['id', 'first_name','last_name', 'student_number']
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,4 +22,4 @@ class InstructorSerializer(serializers.ModelSerializer):
 class SimpleInstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ['first_name','last_name']
+        fields = ['id', 'first_name','last_name']

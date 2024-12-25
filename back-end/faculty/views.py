@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 from .models import Student, Instructor
 from rest_framework.exceptions import PermissionDenied
 from .serializers import StudentSerializer, InstructorSerializer
@@ -8,8 +9,15 @@ from .filters import InstructorFilter
 
 
 class StudentViewSet(ModelViewSet):
-    queryset = Student.objects.all()
+    # queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_staff:
+            return Student.objects.all()
 
     def get_serializer_context(self):
         return {'request': self.request}

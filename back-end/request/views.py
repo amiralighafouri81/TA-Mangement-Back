@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from faculty.models import Student, Instructor
 from .models import Request
-from .serializers import StudentRequestSerializer, InstructorRequestSerializer
+from .serializers import StudentRequestSerializer, InstructorRequestSerializer, AdminRequestSerializer
 
 
 class RequestViewSet(ModelViewSet):
@@ -13,7 +13,10 @@ class RequestViewSet(ModelViewSet):
         user = self.request.user
         if user.role == 'instructor':
             return InstructorRequestSerializer
-        return StudentRequestSerializer  # Default to StudentRequestSerializer if role is student
+        elif user.role == 'student':
+            return StudentRequestSerializer
+        elif user.role =='admin':
+            return AdminRequestSerializer
 
     def get_queryset(self):
         user = self.request.user
