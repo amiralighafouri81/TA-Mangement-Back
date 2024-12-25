@@ -68,4 +68,4 @@ class InstructorViewSet(ModelViewSet):
         if not request.user.is_staff:
             raise PermissionDenied("You do not have permission to update this object.")
         # Proceed with the update if user has is_staff = True
-        return super().update(request, *args, **kwargs)
+        return super().create(request, *args, **kwargs)
