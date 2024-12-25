@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 class Course(models.Model):
     semester = models.IntegerField()
-    instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT)
+    instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT, null=True, blank=True)
     name = models.CharField(max_length=100)
     head_TA = OneToOneField('request.Request', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     condition = models.TextField(null = True, blank=True)

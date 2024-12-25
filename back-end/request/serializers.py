@@ -16,8 +16,8 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         return str(obj.course)
 
 class InstructorRequestSerializer(serializers.ModelSerializer):
-    student = SimpleStudentSerializer(read_only=True)
-    course = SimpleCourseSerializer(read_only=True)
+    # student = SimpleStudentSerializer(read_only=True)
+    # course = SimpleCourseSerializer(read_only=True)
     class Meta:
         model = Request
         fields = ['id','student', 'course', 'status', 'date']

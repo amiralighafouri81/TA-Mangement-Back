@@ -1,6 +1,6 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-from faculty.models import Student
+from faculty.models import Student, Instructor
 from .models import Request
 from .serializers import StudentRequestSerializer, InstructorRequestSerializer
 
@@ -17,6 +17,7 @@ class RequestViewSet(ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
+
         if user.is_staff:
             return Request.objects.all()
 
@@ -25,7 +26,13 @@ class RequestViewSet(ModelViewSet):
             student_id, created = Student.objects.only("id").get_or_create(user_id=user.id)
             return Request.objects.filter(student=student_id)
 
-        return Request.objects.all()
+        elif user.role == 'instructor':
+            # Get all courses taught by the current instructor
+            instructor = Instructor.objects.get(user=user)
+            courses = instructor.course_set.all()  # All courses where the instructor is teaching
+
+            # Get all requests associated with these courses
+            return Request.objects.filter(course__in=courses)
 
     def get_serializer_context(self):
         return {'request': self.request}
