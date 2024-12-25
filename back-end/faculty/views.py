@@ -22,6 +22,8 @@ class StudentViewSet(ModelViewSet):
     def get_serializer_context(self):
         return {'request': self.request}
 
+
+
 class InstructorViewSet(ModelViewSet):
     queryset = Instructor.objects.all()
     serializer_class = InstructorSerializer
@@ -39,3 +41,17 @@ class InstructorViewSet(ModelViewSet):
 
         # Proceed with the default destroy method if user is staff
         return super().destroy(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        # Only allow users with is_staff = True to update the student object
+        if not request.user.is_staff:
+            raise PermissionDenied("You do not have permission to delete this object.")
+        # Proceed with the update if user has is_staff = True
+        return super().update(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        # Only allow users with is_staff = True to update the student object
+        if not request.user.is_staff:
+            raise PermissionDenied("You do not have permission to update this object.")
+        # Proceed with the update if user has is_staff = True
+        return super().update(request, *args, **kwargs)

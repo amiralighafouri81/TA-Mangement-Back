@@ -24,3 +24,19 @@ class CourseViewSet(ModelViewSet):
 
         # Proceed with the default destroy method if user is staff
         return super().destroy(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        # Check if the user is staff
+        if not request.user.is_staff:
+            raise PermissionDenied("You do not have permission to update this object.")
+
+        # Proceed with the default destroy method if user is staff
+        return super().destroy(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        # Check if the user is staff
+        if not request.user.is_staff:
+            raise PermissionDenied("You do not have permission to create this object.")
+
+        # Proceed with the default destroy method if user is staff
+        return super().destroy(request, *args, **kwargs)
