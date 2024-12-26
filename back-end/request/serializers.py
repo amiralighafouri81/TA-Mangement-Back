@@ -8,6 +8,7 @@ from course.serializers import SimpleCourseSerializer
 
 
 class StudentRequestSerializer(serializers.ModelSerializer):
+    course = SimpleCourseSerializer(read_only=True)  # Ensure this is included
 
     class Meta:
         model = Request
@@ -15,36 +16,27 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         read_only_fields = ['status']
 
     def validate(self, data):
-        # Get the currently logged-in user
         user = self.context['request'].user
-
-        # Get or create the student object related to the logged-in user
         student, created = Student.objects.get_or_create(user=user)
 
-        # Check if a request with the same course and student already exists
         if Request.objects.filter(course=data['course'], student=student).exists():
             raise PermissionDenied("You have already made a request for this course.")
 
         course = data['course']
         if course.condition is not None and data['score'] < course.condition:
-            raise PermissionDenied(
-                f"Your score ({data['score']}) is below the required condition ({course.condition}) for this course."
-            )
+            raise PermissionDenied("Your score is lower than required condition for this course.")
 
         return data
 
     def create(self, validated_data):
-        # Get the currently logged-in user
         user = self.context['request'].user
-
-        # Get or create the student object related to the logged-in user
         student, created = Student.objects.get_or_create(user=user)
-
-        # Add the student to the validated data
         validated_data['student'] = student
-
-        # Call the parent class's create method to save the request
         return super().create(validated_data)
+
+    def get_course(self, obj):
+        return str(obj.course)
+
 
 class InstructorRequestSerializer(serializers.ModelSerializer):
     # student = SimpleStudentSerializer(read_only=True)
@@ -58,6 +50,7 @@ class InstructorRequestSerializer(serializers.ModelSerializer):
         return str(obj.course)
 
 class AdminRequestSerializer(serializers.ModelSerializer):
+    course = SimpleCourseSerializer(read_only=True)
     class Meta:
         model = Request
         fields = ['id','student', 'course', 'status', 'date']
