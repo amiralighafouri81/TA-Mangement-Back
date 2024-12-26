@@ -5,10 +5,15 @@ from django.shortcuts import get_object_or_404
 from faculty.models import Student, Instructor
 from .models import Request
 from .serializers import StudentRequestSerializer, InstructorRequestSerializer, AdminRequestSerializer
-
+from .pagination import DefaultPagination
+from django_filters.rest_framework import DjangoFilterBackend
+from .filters import RequestFilter
 
 class RequestViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = RequestFilter
+    pagination_class = DefaultPagination
 
     def get_serializer_class(self):
         # Get the user role and return the corresponding serializer

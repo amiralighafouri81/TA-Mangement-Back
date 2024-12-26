@@ -7,4 +7,5 @@ class CourseFilter(FilterSet):
         fields = {
             'name': ['icontains'],
             'id' : ['exact'],
+            'instructor': ['exact'],
         }
