@@ -2,11 +2,14 @@ from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateS
 from rest_framework import serializers
 from faculty.models import Student, Instructor
 from core.models import User
+from django.db import IntegrityError
+from rest_framework.exceptions import ValidationError as DRFValidationError
 
 
 class UserCreateSerializer(BaseUserCreateSerializer):
     student_number = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True, style={'input_type': 'password'})
+
     class Meta(BaseUserCreateSerializer.Meta):
         model = User
         fields = [
@@ -17,7 +20,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
     def validate(self, attrs):
         self.student_number = attrs.pop('student_number', None)
         if attrs['password'] != attrs.pop('password_confirmation'):
-            raise serializers.ValidationError({"password_confirmation": "Passwords do not match."})
+            raise DRFValidationError({"password_confirmation": "Passwords do not match."})
         return super().validate(attrs)
 
     def create(self, validated_data):
@@ -27,7 +30,12 @@ class UserCreateSerializer(BaseUserCreateSerializer):
         user.save()
 
         if self.student_number:
-            Student.objects.create(user=user, student_number=self.student_number)
+            try:
+                # Try to create the student object
+                Student.objects.create(user=user, student_number=self.student_number)
+            except IntegrityError:
+                # Catch the duplicate entry error and raise a ValidationError
+                raise DRFValidationError({"student_number": "A student with that student number already exists."})
 
         return user
 
@@ -131,11 +139,23 @@ class UserSerializer(BaseUserSerializer):
         role = self.instance.role if self.instance else attrs.get('role', None)
 
         if role == User.STUDENT:
-            if 'student_number' not in attrs and self.instance:
-                attrs['student_number'] = getattr(self.instance, 'student_number', None)
+            # Validate student_number to prevent duplicates
+            if 'student_number' in attrs:
+                try:
+                    # Check for duplicate student_number
+                    Student.objects.get(student_number=attrs['student_number'])
+                    raise DRFValidationError({"student_number": "A student with that student number already exists."})
+                except Student.DoesNotExist:
+                    pass
+
         elif role == User.INSTRUCTOR:
-            if 'staff_id' not in attrs and self.instance:
-                attrs['staff_id'] = getattr(self.instance, 'staff_id', None)
-        return attrs
+            # Validate staff_id to prevent duplicates
+            if 'staff_id' in attrs:
+                try:
+                    # Check for duplicate staff_id
+                    Instructor.objects.get(staff_id=attrs['staff_id'])
+                    raise DRFValidationError({"staff_id": "An instructor with that staff ID already exists."})
+                except Instructor.DoesNotExist:
+                    pass
 
-
+        return super().validate(attrs)

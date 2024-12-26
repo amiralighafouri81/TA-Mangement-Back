@@ -30,7 +30,7 @@ class StudentViewSet(ModelViewSet):
 
 
 class InstructorViewSet(ModelViewSet):
-    # queryset = Instructor.objects.all()
+    queryset = Instructor.objects.all()
     serializer_class = InstructorSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]

@@ -5,7 +5,8 @@ from core.models import User
 
 class Student(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    student_number = models.CharField(max_length=10, unique=True)
+    student_number = models.CharField(error_messages={'unique': 'A student with that student number already exists.'},
+                                      max_length=10, unique=True)
     # resume_link
     biography = models.TextField()
 
@@ -31,11 +32,10 @@ class Student(models.Model):
         ordering = ["id"]
 
 class Instructor(models.Model):
-    # first_name = models.CharField(max_length=50)
-    # last_name = models.CharField(max_length=50)
-    # email = models.EmailField()
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    staff_id = models.CharField(max_length=10, unique=True)
+    staff_id = models.CharField(error_messages={'unique': 'An instructor with that staff id already exists.'},
+                                max_length=10, unique=True)
     way_of_communication = models.TextField()
     research_fields = models.TextField()
 

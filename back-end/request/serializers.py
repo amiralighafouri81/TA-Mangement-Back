@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Request
 from faculty.models import Student
+from rest_framework.exceptions import PermissionDenied
+
 
 
 
@@ -8,7 +10,7 @@ class StudentRequestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Request
-        fields = ['id', 'course', 'status', 'date']
+        fields = ['id', 'course', 'score', 'status', 'date']
         read_only_fields = ['status']
 
     def validate(self, data):
@@ -20,7 +22,13 @@ class StudentRequestSerializer(serializers.ModelSerializer):
 
         # Check if a request with the same course and student already exists
         if Request.objects.filter(course=data['course'], student=student).exists():
-            raise serializers.ValidationError("You have already made a request for this course.")
+            raise PermissionDenied("You have already made a request for this course.")
+
+        course = data['course']
+        if course.condition is not None and data['score'] < course.condition:
+            raise PermissionDenied(
+                f"Your score ({data['score']}) is below the required condition ({course.condition}) for this course."
+            )
 
         return data
 
@@ -42,8 +50,8 @@ class InstructorRequestSerializer(serializers.ModelSerializer):
     # course = SimpleCourseSerializer(read_only=True)
     class Meta:
         model = Request
-        fields = ['id','student', 'course', 'status', 'date']
-        read_only_fields = ['id', 'student', 'course', 'date']
+        fields = ['id','student', 'course', 'score', 'status', 'date']
+        read_only_fields = ['id', 'student', 'course', 'date', 'score']
 
     def get_course(self, obj):
         return str(obj.course)

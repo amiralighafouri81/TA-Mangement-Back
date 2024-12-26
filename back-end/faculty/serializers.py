@@ -20,4 +20,5 @@ class InstructorSerializer(serializers.ModelSerializer):
 class SimpleInstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ['id', 'first_name','last_name']
+        fields = ['id', 'first_name','last_name', 'way_of_communication', 'research_fields']
+        read_only_fields = ['way_of_communication', 'research_fields']

@@ -41,10 +41,7 @@ class CourseViewSet(ModelViewSet):
         # Check if the user is staff
         if not user.is_staff and user.role != 'instructor':
             raise PermissionDenied("You do not have permission to update this object.")
-        elif user.role == 'instructor':
-            data = request.data
-            if set(data.keys()) != {'head_TA'}:
-                raise PermissionDenied("You are only allowed to update the 'head_TA' field.")
+
         # Proceed with the default destroy method if user is staff
         return super().update(request, *args, **kwargs)
 

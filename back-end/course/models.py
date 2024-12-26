@@ -1,7 +1,5 @@
 from django.db import models
-from django.db.models import OneToOneField
 from faculty.models import Instructor
-from django.core.exceptions import ValidationError
 from rest_framework.exceptions import PermissionDenied
 from request.models import Request
 
@@ -17,7 +15,7 @@ class Course(models.Model):
         blank=True,
         related_name='+'
     )
-    condition = models.TextField(null=True, blank=True)
+    condition = models.FloatField(null=True, blank=True)
 
     def clean(self):
         # Check if the selected head_TA is valid
@@ -29,12 +27,16 @@ class Course(models.Model):
             if self.head_TA.status != Request.REQUSET_STATUS_ACCEPTED:
                 raise PermissionDenied("The selected head_TA must have an accepted request.")
 
+        if self.condition is not None:
+            if self.instructor and (self.condition < 10 or self.condition > 20):
+                raise PermissionDenied("Instructors can only enter numbers between 10 and 20 for the condition.")
+
     def save(self, *args, **kwargs):
         # Validate before saving
         self.clean()
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"id: {self.id} - {self.name} - {self.instructor} - Semester: {self.semester} "
+        return f"id: {self.id} - {self.name} - {self.instructor} - Semester: {self.semester} - Minimum Score: {self.condition} "
 
 

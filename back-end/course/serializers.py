@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from faculty.serializers import SimpleInstructorSerializer
 from .models import Course
 from request.models import Request
+from faculty.serializers import TAStudentSerializer, SimpleInstructorSerializer
+from faculty.models import Student
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -10,28 +11,32 @@ class CourseSerializer(serializers.ModelSerializer):
         required=False,
         allow_null=True
     )
+    accepted_students = serializers.SerializerMethodField()
+    # instructor = SimpleInstructorSerializer()
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor', 'head_TA']
+        fields = ['id', 'name', 'semester', 'instructor', 'head_TA', 'condition', 'accepted_students']
         read_only_fields = ['id', 'name', 'semester', 'instructor']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         request = self.context.get('request')
         if request and request.user.is_authenticated and request.user.role == 'instructor':
-            # Fetch the instructor's course based on the course being updated
             instructor_courses = Course.objects.filter(instructor__user=request.user)
             if self.instance and self.instance in instructor_courses:
-                # Filter requests for the course with 'accepted' status
                 self.fields['head_TA'].queryset = Request.objects.filter(
                     course=self.instance,
                     status=Request.REQUSET_STATUS_ACCEPTED
                 )
 
+    def get_accepted_students(self, obj):
+        # Fetch accepted requests for the course
+        accepted_requests = Request.objects.filter(course=obj, status=Request.REQUSET_STATUS_ACCEPTED)
 
-class SimpleCourseSerializer(serializers.ModelSerializer):
-    instructor = SimpleInstructorSerializer()
-    class Meta:
-        model = Course
-        fields = ['id','name','semester', 'instructor']
+        # Get the actual Student objects using the student IDs
+        student_ids = accepted_requests.values_list('student', flat=True)
+        students = Student.objects.filter(id__in=student_ids)
+
+        # Use the TAStudentSerializer to serialize the list of students
+        return TAStudentSerializer(students, many=True).data

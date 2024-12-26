@@ -16,6 +16,7 @@ class Request(models.Model):
     status = models.CharField(max_length=10, choices=PAYMENT_STATUS_CHOICES, default=REQUSET_STATUS_PENDING)
     date = models.DateTimeField(auto_now_add=True)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    score = models.FloatField()
 
     def save(self, *args, **kwargs):
         from course.models import Course
