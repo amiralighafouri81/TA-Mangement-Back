@@ -39,7 +39,6 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 
         return user
 
-
 class UserSerializer(BaseUserSerializer):
     student_number = serializers.CharField(required=False, allow_null=True)
     biography = serializers.CharField(required=False, allow_null=True)
@@ -139,23 +138,19 @@ class UserSerializer(BaseUserSerializer):
         role = self.instance.role if self.instance else attrs.get('role', None)
 
         if role == User.STUDENT:
-            # Validate student_number to prevent duplicates
-            if 'student_number' in attrs:
-                try:
-                    # Check for duplicate student_number
-                    Student.objects.get(student_number=attrs['student_number'])
+            student = Student.objects.filter(user=self.instance).first()
+
+            # Only validate student_number if it's being updated and it exists
+            if 'student_number' in attrs and attrs['student_number'] != (student.student_number if student else None):
+                if Student.objects.filter(student_number=attrs['student_number']).exclude(user=self.instance).exists():
                     raise DRFValidationError({"student_number": "A student with that student number already exists."})
-                except Student.DoesNotExist:
-                    pass
 
         elif role == User.INSTRUCTOR:
-            # Validate staff_id to prevent duplicates
-            if 'staff_id' in attrs:
-                try:
-                    # Check for duplicate staff_id
-                    Instructor.objects.get(staff_id=attrs['staff_id'])
+            instructor = Instructor.objects.filter(user=self.instance).first()
+
+            # Only validate staff_id if it's being updated and it exists
+            if 'staff_id' in attrs and attrs['staff_id'] != (instructor.staff_id if instructor else None):
+                if Instructor.objects.filter(staff_id=attrs['staff_id']).exclude(user=self.instance).exists():
                     raise DRFValidationError({"staff_id": "An instructor with that staff ID already exists."})
-                except Instructor.DoesNotExist:
-                    pass
 
         return super().validate(attrs)
