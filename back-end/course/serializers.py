@@ -17,7 +17,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor', 'head_TA', 'condition', 'accepted_students']
+        fields = ['id', 'name', 'semester', 'instructor', 'head_TA', 'accepted_students']
         read_only_fields = ['id', 'name', 'semester', 'instructor']
 
     def __init__(self, *args, **kwargs):
@@ -53,5 +53,5 @@ class SimpleCourseSerializer(CourseSerializer):
     instructor = SimpleInstructorSerializer(read_only=True)
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor', 'condition']
-        read_only_fields = ['id', 'name', 'semester', 'instructor', 'condition']
+        fields = ['id', 'name', 'semester', 'instructor']
+        read_only_fields = ['id', 'name', 'semester', 'instructor']

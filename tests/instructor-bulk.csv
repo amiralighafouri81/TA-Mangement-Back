@@ -1,4 +1,4 @@
 username,password,first_name,last_name,email,staff_id,way_of_communication,research_fields
-jdoe3,pass123,John,Doe,jdoe@example.com,112345,"Email, Phone","Machine Learning, AI"
-asmith3,pass234,Alice,Smith,asmith@example.com,167890,"Office Hours, Email","Data Science, Big Data"
+jdoe3,1234,John,Doe,jdoe@example.com,112345,"Email, Phone","Machine Learning, AI"
+asmith3,1234,Alice,Smith,asmith@example.com,167890,"Office Hours, Email","Data Science, Big Data"
 

@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
 
-
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
@@ -15,4 +14,6 @@ class UserAdmin(BaseUserAdmin):
         ),
     )
     list_display = ("id", "username", "first_name", "last_name", "role", "is_staff")
-
+    list_per_page = 10
+    search_fields = ['user__first_name__istartswith', 'user__last_name__istartswith']
+    ordering = ('id',)  # Sort by id
