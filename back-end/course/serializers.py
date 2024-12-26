@@ -6,13 +6,14 @@ from faculty.models import Student
 
 
 class CourseSerializer(serializers.ModelSerializer):
-    head_TA = serializers.PrimaryKeyRelatedField(
-        queryset=Request.objects.none(),  # Initialize with an empty queryset
-        required=False,
-        allow_null=True
-    )
+    # head_TA = serializers.PrimaryKeyRelatedField(
+    #     queryset=Request.objects.none(),  # Initialize with an empty queryset
+    #     required=False,
+    #     allow_null=True
+    # )
     accepted_students = serializers.SerializerMethodField()
-    # instructor = SimpleInstructorSerializer()
+    instructor = SimpleInstructorSerializer(read_only=True)
+    head_TA = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
@@ -40,3 +41,17 @@ class CourseSerializer(serializers.ModelSerializer):
 
         # Use the TAStudentSerializer to serialize the list of students
         return TAStudentSerializer(students, many=True).data
+
+    def get_head_TA(self, obj):
+        if obj.head_TA:
+            return TAStudentSerializer(obj.head_TA.student).data  # Assuming `head_TA` has a `student` field
+        return None  # Return `None` if there is no head TA
+
+
+
+class SimpleCourseSerializer(CourseSerializer):
+    instructor = SimpleInstructorSerializer(read_only=True)
+    class Meta:
+        model = Course
+        fields = ['id', 'name', 'semester', 'instructor', 'condition']
+        read_only_fields = ['id', 'name', 'semester', 'instructor', 'condition']

@@ -7,7 +7,7 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['id', 'first_name','last_name', 'student_number', 'biography']
 
-class TAStudentSerializer(serializers.ModelSerializer):
+class TAStudentSerializer(StudentSerializer):
     class Meta:
         model = Student
         fields = ['id', 'first_name','last_name', 'student_number']
@@ -17,7 +17,7 @@ class InstructorSerializer(serializers.ModelSerializer):
         model = Instructor
         fields = ['id', 'first_name','last_name', 'way_of_communication', 'research_fields']
 
-class SimpleInstructorSerializer(serializers.ModelSerializer):
+class SimpleInstructorSerializer(InstructorSerializer):
     class Meta:
         model = Instructor
         fields = ['id', 'first_name','last_name', 'way_of_communication', 'research_fields']

@@ -57,3 +57,8 @@ class RequestViewSet(ModelViewSet):
 
         # Call the parent class's destroy method for other roles
         return super().destroy(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        user = request.user
+        if user.role == 'instructor':
+            raise PermissionDenied("Instructors are not allowed to create requests.")
