@@ -36,6 +36,8 @@ class Course(models.Model):
         self.clean()
         super().save(*args, **kwargs)
 
+
+
     def __str__(self):
         return f"id: {self.id} - {self.name} - {self.instructor} - Semester: {self.semester} - Minimum Score: {self.condition} "
 
