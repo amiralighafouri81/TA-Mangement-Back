@@ -1,0 +1,5 @@
+name,semester,instructor_username,head_ta_request_id,condition
+Mathematics,1,john_doe,101,15
+Physics,2,jane_doe,102,18
+Chemistry,3,,,
+
