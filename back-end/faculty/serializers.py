@@ -15,7 +15,7 @@ class TAStudentSerializer(StudentSerializer):
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
-        fields = ['id', 'first_name','last_name', 'way_of_communication', 'research_fields']
+        fields = ['id', 'first_name','last_name', 'way_of_communication', 'research_fields', 'email']
 
 class SimpleInstructorSerializer(InstructorSerializer):
     class Meta:

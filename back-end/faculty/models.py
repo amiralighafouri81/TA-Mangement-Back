@@ -28,6 +28,9 @@ class Student(models.Model):
     def last_name(self):
         return self.user.last_name
 
+    def email(self):
+        return self.user.email
+
     class Meta:
         ordering = ["id"]
 
@@ -56,6 +59,9 @@ class Instructor(models.Model):
 
     def last_name(self):
         return self.user.last_name
+
+    def email(self):
+        return self.user.email
 
     class Meta:
         ordering = ["id"]

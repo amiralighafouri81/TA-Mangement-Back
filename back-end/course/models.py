@@ -5,7 +5,7 @@ from request.models import Request
 
 
 class Course(models.Model):
-    semester = models.IntegerField()
+    semester = models.CharField(max_length=50)
     instructor = models.ForeignKey(Instructor, on_delete=models.PROTECT, null=True, blank=True)
     name = models.CharField(max_length=100)
     head_TA = models.OneToOneField(
