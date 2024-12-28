@@ -196,7 +196,9 @@ SWAGGER_SETTINGS = {
 
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://ta.mohsenkarimi.ir",
+]
 
 CORS_ALLOW_METHODS = [
     "GET",
