@@ -35,8 +35,8 @@ class UserCreateSerializer(BaseUserCreateSerializer):
                 Student.objects.create(user=user, student_number=self.student_number)
             except IntegrityError:
                 # Catch the duplicate entry error and raise a ValidationError
+                user.delete()
                 raise DRFValidationError({"student_number": "A student with that student number already exists."})
-
         return user
 
 class UserSerializer(BaseUserSerializer):
