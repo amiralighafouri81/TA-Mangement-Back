@@ -4,7 +4,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from .models import Course
 from .pagination import DefaultPagination
-from .serializers import CourseSerializer
+from .serializers import StudentCourseSerializer, InstructorCourseSerializer, AdminCourseSerializer
 from .filters import CourseFilter
 from faculty.models import Instructor
 
@@ -13,10 +13,20 @@ class CourseViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = Course.objects.all()
-    serializer_class = CourseSerializer
+    # serializer_class = StudentCourseSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = CourseFilter
     pagination_class = DefaultPagination
+
+    def get_serializer_class(self):
+        # Get the user role and return the corresponding serializer
+        user = self.request.user
+        if user.role == 'instructor':
+            return InstructorCourseSerializer
+        elif user.role == 'student':
+            return StudentCourseSerializer
+        elif user.role =='admin':
+            return AdminCourseSerializer
 
     def get_queryset(self):
         user = self.request.user

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Request
 from faculty.models import Student
+from faculty.serializers import StudentSerializer
 from course.models import Course  # Ensure to import your Course model
 from course.serializers import SimpleCourseSerializer
 from rest_framework.exceptions import PermissionDenied
@@ -40,7 +41,7 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         return str(obj.course)
 
 class InstructorRequestSerializer(serializers.ModelSerializer):
-    # student = SimpleStudentSerializer(read_only=True)
+    student = StudentSerializer(read_only=True)
     course = SimpleCourseSerializer(read_only=True)
     class Meta:
         model = Request

@@ -29,7 +29,7 @@ class Request(models.Model):
                 if course:
                     course.head_TA = None
                     course.save()
-
+        self.clean()
         super().save(*args, **kwargs)
 
     def clean(self):

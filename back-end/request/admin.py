@@ -3,6 +3,6 @@ from . import models
 
 @admin.register(models.Request)
 class RequestAdmin(admin.ModelAdmin):
-    list_display = ('course', 'student', 'status')
+    list_display = ('course', 'student','score', 'status')
     list_per_page = 10
     # search_fields = ['name__istartswith']
