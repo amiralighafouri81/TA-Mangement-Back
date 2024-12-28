@@ -130,7 +130,7 @@ def add_bulk_upload_functionality_to_course(admin_class):
                             defaults={
                                 "instructor": instructor,
                                 "head_TA": head_ta_request,
-                                "condition": row["condition"] if row["condition"] else None,
+                                "condition": float(row["condition"]) if row["condition"] else None 
                             },
                         )
                         if course_created:
@@ -143,6 +143,7 @@ def add_bulk_upload_functionality_to_course(admin_class):
                                 course.head_TA = head_ta_request
                             if row["condition"]:
                                 course.condition = row["condition"]
+                                #course.condition = float(row["condition"]) if row["condition"] else None
                             course.save()
                     except Exception as e:
                         self.message_user(request, f"Error processing row for {row.get('name', 'Unknown')}: {e}", level="error")
