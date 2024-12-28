@@ -11,12 +11,11 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         queryset=Course.objects.all(), source='course', write_only=True
     )
     course = SimpleCourseSerializer(read_only=True)
-    message = serializers.SerializerMethodField()
 
     class Meta:
         model = Request
-        fields = ['id', 'course_id', 'course', 'score', 'status', 'date', 'message']
-        read_only_fields = ['status', 'message']
+        fields = ['id', 'course_id', 'course', 'score', 'status', 'date']
+        read_only_fields = ['status']
 
     def validate(self, data):
         user = self.context['request'].user
@@ -33,23 +32,21 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         student, created = Student.objects.get_or_create(user=user)
         validated_data['student'] = student
 
-        # Check the course condition
         course = validated_data['course']
         if course.condition is not None and validated_data['score'] < course.condition:
+            # Create the request with declined status
             validated_data['status'] = 'declined'
-            # Add a custom message to the context
-            self.context['message'] = (
-                f"Your request was declined because your score ({validated_data['score']}) "
-                f"is lower than the required score for this course."
+            request = super().create(validated_data)
+
+            # Raise a PermissionDenied error with a custom message
+            raise PermissionDenied(
+                f"Your request is declined because your score "
+                f"({validated_data['score']}) is lower than the required score for this course."
             )
-        else:
-            validated_data['status'] = 'pending'
 
+        # Create the request with default 'pending' status
+        validated_data['status'] = 'pending'
         return super().create(validated_data)
-
-    def get_message(self, obj):
-        # Return the custom message if available in the context
-        return self.context.get('message', '')
 
     def get_course(self, obj):
         return str(obj.course)
