@@ -39,6 +39,6 @@ class Course(models.Model):
 
 
     def __str__(self):
-        return f"id: {self.id} - {self.name} - {self.instructor} - Semester: {self.semester} - Minimum Score: {self.condition} "
+        return f"id: {self.id} - {self.name} - {self.instructor} - Semester: {self.semester} "
 
 
