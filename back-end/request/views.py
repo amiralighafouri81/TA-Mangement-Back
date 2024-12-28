@@ -16,36 +16,51 @@ class RequestViewSet(ModelViewSet):
     pagination_class = DefaultPagination
 
     def get_serializer_class(self):
-        # Get the user role and return the corresponding serializer
         user = self.request.user
         if user.role == 'instructor':
             return InstructorRequestSerializer
         elif user.role == 'student':
             return StudentRequestSerializer
-        elif user.role =='admin':
+        elif user.role == 'admin':
             return AdminRequestSerializer
 
     def get_queryset(self):
         user = self.request.user
 
-        if user.is_staff:
+        if user.is_staff or user.role == 'admin':
             return Request.objects.all()
 
         if user.role == 'student':
-            # Only filter requests for the logged-in student
-            student_id, created = Student.objects.only("id").get_or_create(user_id=user.id)
-            return Request.objects.filter(student=student_id)
+            # Fetch only the student's requests
+            student, _ = Student.objects.get_or_create(user=user)
+            return Request.objects.filter(student=student)
 
         elif user.role == 'instructor':
-            # Get all courses taught by the current instructor
+            # Fetch courses taught by the instructor
             instructor = Instructor.objects.get(user=user)
-            courses = instructor.course_set.all()  # All courses where the instructor is teaching
-            # Get all requests associated with these courses, excluding declined requests
+            courses = instructor.course_set.all()
+
+            # Filter requests for these courses, excluding declined ones
             return Request.objects.filter(course__in=courses).exclude(status=Request.REQUSET_STATUS_DECLINED)
-            # For other roles (admin, student), show all requests or adjust as necessary
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+        user = self.request.user
+
+        if user.role == 'student':
+            student, _ = Student.objects.get_or_create(user=user)
+            requested_courses = Request.objects.filter(student=student).values_list('course_id', flat=True)
+            return queryset.filter(course_id__in=requested_courses)
+
+        elif user.role == 'instructor':
+            instructor = Instructor.objects.get(user=user)
+            taught_courses = instructor.course_set.values_list('id', flat=True)
+            return queryset.filter(course_id__in=taught_courses).exclude(status=Request.REQUSET_STATUS_DECLINED)
+
+        return queryset
 
     def destroy(self, request, *args, **kwargs):
         # Get the Request instance
