@@ -29,7 +29,7 @@ class Course(models.Model):
 
         if self.condition is not None:
             if self.instructor and (self.condition < 10 or self.condition > 20):
-                raise PermissionDenied("Instructors can only enter numbers between 10 and 20 for the condition.")
+                raise PermissionDenied("condition must be between 10 and 20.")
 
     def save(self, *args, **kwargs):
         # Validate before saving

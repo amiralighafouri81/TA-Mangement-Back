@@ -68,3 +68,8 @@ class RequestViewSet(ModelViewSet):
         if user.role == 'instructor':
             raise PermissionDenied("Instructors are not allowed to create requests.")
         return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        if user.role == 'student':
+            raise PermissionDenied("Students are not allowed to update requests.")

@@ -6,6 +6,7 @@ from django.db import IntegrityError
 from rest_framework.exceptions import ValidationError as DRFValidationError
 
 
+
 class UserCreateSerializer(BaseUserCreateSerializer):
     student_number = serializers.CharField(write_only=True)
     password_confirmation = serializers.CharField(write_only=True, style={'input_type': 'password'})
@@ -154,3 +155,5 @@ class UserSerializer(BaseUserSerializer):
                     raise DRFValidationError({"staff_id": "An instructor with that staff ID already exists."})
 
         return super().validate(attrs)
+
+

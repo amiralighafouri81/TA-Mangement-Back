@@ -1,6 +1,6 @@
 from django.db import models
 from faculty.models import Student
-
+from rest_framework.exceptions import PermissionDenied
 
 
 class Request(models.Model):
@@ -31,6 +31,13 @@ class Request(models.Model):
                     course.save()
 
         super().save(*args, **kwargs)
+
+    def clean(self):
+        # Check if the selected head_TA is valid
+
+        if self.score is not None:
+            if self.student and (self.score < 10 or self.score > 20):
+                raise PermissionDenied("score must be between 10 and 20.")
 
     def __str__(self):
         return f"{self.student}"
