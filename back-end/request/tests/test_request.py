@@ -9,11 +9,16 @@ from course.models import Course
 class TestCreateRequest:
     def test_if_user_is_anonymous_returns_401(self):
         client = APIClient()
-        response = client.post('/request/requests/', {"course_id": 5,"score": 20})
+        response = client.get('/request/requests/')
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
-    def test_if_user_is_student_and_post_a_request_returns_403(self):
+    def test_if_user_is_instructor_and_post_a_request_returns_403(self):
+        user = get_user_model()
+        instructor_user = user.objects.create_user(
+            username="instructor_user", password="password123", role=user.INSTRUCTOR
+        )
+
         client = APIClient()
         client.force_authenticate(user = {})
         response = client.post('/request/requests/', {"status": "pending"})
@@ -37,7 +42,6 @@ class TestCreateRequest:
 
         # Create a course and assign it to the instructor
         course = Course.objects.create(
-            # id=1,
             semester="Fall 2024",
             instructor=instructor,
             name="Introduction to Programming",

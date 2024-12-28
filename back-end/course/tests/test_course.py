@@ -9,7 +9,7 @@ from course.models import Course
 class TestCreateRequest:
     def test_if_user_is_anonymous_returns_401(self):
         client = APIClient()
-        response = client.post('/course/courses/', {"course_id": 5,"score": 20})
+        response = client.get('/course/courses/')
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
@@ -54,41 +54,39 @@ class TestCreateRequest:
 
         assert response.status_code == status.HTTP_403_FORBIDDEN
 
-    # def test_if_user_is_student_and_score_satisfies_condition_returns_201(self):
-    #     # Get the custom User model
-    #     user = get_user_model()
-    #
-    #     # Create an instructor user
-    #     instructor_user = user.objects.create_user(
-    #         username="instructor_user", password="password123", role=user.INSTRUCTOR
-    #     )
-    #     # Create an instructor instance
-    #     instructor = Instructor.objects.create(
-    #         user=instructor_user,
-    #         staff_id="INSTR001",
-    #         way_of_communication="Email",
-    #         research_fields="Computer Science"
-    #     )
-    #
-    #     # Create a course and assign it to the instructor
-    #     course = Course.objects.create(
-    #         semester="Fall 2024",
-    #         instructor=instructor,
-    #         name="Introduction to Programming",
-    #         condition=17.0
-    #     )
-    #
-    #     # Create a student user
-    #     student_user = user.objects.create_user(
-    #         username="student_user", password="password123", role=user.STUDENT
-    #     )
-    #
-    #     # Authenticate the student user
-    #     client = APIClient()
-    #     client.force_authenticate(user=student_user)
-    #
-    #     # Make the POST request to create a request
-    #     response = client.post('/request/requests/', {"course_id": course.id, "score": 19})
-    #
-    #     # Assert the response status code
-    #     assert response.status_code == status.HTTP_201_CREATED
+    def test_if_user_is_instructor_and_put_condition_returns_200(self):
+        # Get the custom User model
+        user = get_user_model()
+
+        # Create an instructor user
+        instructor_user = user.objects.create_user(
+            username="instructor_user", password="password123", role=user.INSTRUCTOR
+        )
+        # Create an instructor instance
+        instructor = Instructor.objects.create(
+            user=instructor_user,
+            staff_id="INSTR001",
+            way_of_communication="Email",
+            research_fields="Computer Science"
+        )
+
+        # Create a course and assign it to the instructor
+        course = Course.objects.create(
+            id = 1,
+            semester="Fall 2024",
+            instructor=instructor,
+            name="Introduction to Programming",
+            condition=17.0
+        )
+
+        # Authenticate the student user
+        client = APIClient()
+        client.force_authenticate(user=instructor_user)
+
+        # Make the POST request to create a request
+        response = client.put('/course/courses/1/', {"condition": 18})
+
+        course.refresh_from_db()
+
+        # Assert the response status code
+        assert response.status_code == status.HTTP_200_OK and course.condition == 18
