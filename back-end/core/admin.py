@@ -15,5 +15,5 @@ class UserAdmin(BaseUserAdmin):
     )
     list_display = ("id", "username", "first_name", "last_name", "role", "is_staff")
     list_per_page = 10
-    search_fields = ['user__first_name__istartswith', 'user__last_name__istartswith']
+    search_fields = ['first_name__istartswith', 'last_name__istartswith']
     ordering = ('id',)  # Sort by id
