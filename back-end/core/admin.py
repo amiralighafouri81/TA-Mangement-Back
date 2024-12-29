@@ -9,7 +9,15 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("first_name", "last_name", "username", "role", "password1", "password2" ),
+                "fields": ("first_name", "last_name", "username", "role", "password1", "password2"),
+            },
+        ),
+    )
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": ("username", "first_name", "last_name", "email", "role", "is_staff", "is_superuser", "password"),
             },
         ),
     )
