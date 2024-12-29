@@ -45,16 +45,30 @@ class InstructorCourseSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'name', 'semester']
 
     def get_accepted_students(self, obj):
+        # Get the accepted requests for students
         accepted_requests = Request.objects.filter(course=obj, status=Request.REQUSET_STATUS_ACCEPTED)
         student_ids = accepted_requests.values_list('student', flat=True)
         students = Student.objects.filter(id__in=student_ids)
         return TAStudentSerializer(students, many=True).data
 
     def to_representation(self, instance):
+        # Dynamically set the queryset for head_TA based on the course
+        self.fields['head_TA'].queryset = Request.objects.filter(
+            status=Request.REQUSET_STATUS_ACCEPTED,
+            course=instance
+        )
+
+        # Call the default to_representation method
         representation = super().to_representation(instance)
+
+        # Include detailed head_TA info if present
         if instance.head_TA:
+            # Assuming head_TA is a Request object, and we want the student related to it
             representation['head_TA'] = TAStudentSerializer(instance.head_TA.student).data
+
         return representation
+
+
 
 class AdminCourseSerializer(serializers.ModelSerializer):
     accepted_students = serializers.SerializerMethodField()

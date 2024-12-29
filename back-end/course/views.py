@@ -62,3 +62,4 @@ class CourseViewSet(ModelViewSet):
 
         # Proceed with the default destroy method if user is staff
         return super().create(request, *args, **kwargs)
+
