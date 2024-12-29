@@ -5,4 +5,4 @@ from . import models
 class RequestAdmin(admin.ModelAdmin):
     list_display = ('course', 'student','score', 'status')
     list_per_page = 10
-    # search_fields = ['name__istartswith']
+    search_fields = ['course__id', 'student__id']  # Add fields for search

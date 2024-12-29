@@ -5,4 +5,4 @@ from . import models
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'semester', 'instructor', 'head_TA')
     list_per_page = 10
-    search_fields = ['name__istartswith']
+    search_fields = ['name__icontains']
