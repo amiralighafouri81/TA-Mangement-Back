@@ -70,6 +70,6 @@ jobs:
           done
 
       # Step 6: Run Django unit tests
-      #- name: Run tests
-      #  run: docker-compose exec web python manage.py test
+      - name: Run tests
+        run: docker-compose exec web python manage.py test
 
