@@ -6,7 +6,7 @@ from faculty.models import Instructor, Student
 from course.models import Course
 
 @pytest.mark.django_db
-class TestCreateRequest:
+class TestCore:
     def test_if_user_registers_correctly_returns_201(self):
         client = APIClient()
         registration_data = {
