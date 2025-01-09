@@ -24,7 +24,7 @@ class CourseAdminForm(forms.ModelForm):
 @admin.register(models.Course)
 class CourseAdmin(admin.ModelAdmin):
     form = CourseAdminForm  # Use the custom form with the filtered head_TA field
-    list_display = ('id', 'name', 'semester', 'instructor', 'head_TA')
+    list_display = ('id', 'name', 'semester', 'instructor', 'head_TA', 'condition')
     list_per_page = 10
     search_fields = ['name__icontains']
     ordering = ('id',)
