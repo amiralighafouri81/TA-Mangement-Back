@@ -20,11 +20,13 @@ class StudentRequestSerializer(serializers.ModelSerializer):
     def validate(self, data):
         user = self.context['request'].user
         student, created = Student.objects.get_or_create(user=user)
-
+        course = data['course']
         # Check if a request with the same course and student already exists
-        if Request.objects.filter(course=data['course'], student=student).exists():
+        if Request.objects.filter(course=course, student=student).exists():
             raise PermissionDenied("You have already made a request for this course.")
-
+        if course.max_TA_number is not None and \
+                Request.objects.filter(course_id=course.id).count() >= course.max_TA_number:
+            raise PermissionDenied("The capacity of teaching assistants is the completion period")
         return data
 
     def create(self, validated_data):
