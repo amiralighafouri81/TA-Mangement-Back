@@ -1,10 +1,14 @@
 from rest_framework import serializers
 from rest_framework.exceptions import PermissionDenied
+
+import request.models
+from policy.models import Policy
 from .models import Request
 from faculty.models import Student
 from faculty.serializers import StudentSerializer
 from course.models import Course  # Ensure to import your Course model
 from course.serializers import SimpleCourseSerializer
+
 
 class StudentRequestSerializer(serializers.ModelSerializer):
     course_id = serializers.PrimaryKeyRelatedField(
@@ -27,6 +31,10 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         if course.max_TA_number is not None and \
                 Request.objects.filter(course_id=course.id).count() >= course.max_TA_number:
             raise PermissionDenied("The capacity of teaching assistants is the completion period")
+        maximum_number_of_course_for_ta = Policy.objects.filter(key="MaximumNumberOfCourseForTA").first()
+        if maximum_number_of_course_for_ta is not None and maximum_number_of_course_for_ta.value <= \
+                Request.objects.filter(student_id=student.id, status=Request.REQUSET_STATUS_ACCEPTED).count():
+            raise PermissionDenied("student already reach to the maximum number of course for TA")
         return data
 
     def create(self, validated_data):
@@ -53,6 +61,7 @@ class StudentRequestSerializer(serializers.ModelSerializer):
     def get_course(self, obj):
         return str(obj.course)
 
+
 class InstructorRequestSerializer(serializers.ModelSerializer):
     student = StudentSerializer(read_only=True)
     course = SimpleCourseSerializer(read_only=True)
@@ -64,6 +73,8 @@ class InstructorRequestSerializer(serializers.ModelSerializer):
 
     def get_course(self, obj):
         return str(obj.course)
+
+
 
 class AdminRequestSerializer(serializers.ModelSerializer):
     course = SimpleCourseSerializer(read_only=True)
