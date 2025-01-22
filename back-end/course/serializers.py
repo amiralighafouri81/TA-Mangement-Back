@@ -16,8 +16,8 @@ class StudentCourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor', 'head_TA', 'accepted_students']
-        read_only_fields = ['id', 'name', 'semester', 'instructor']
+        fields = ['id', 'name', 'semester', 'instructor', 'max_TA_number', 'head_TA', 'accepted_students']
+        read_only_fields = ['id', 'name', 'semester', 'instructor', 'max_TA_number']
 
     def get_accepted_students(self, obj):
         accepted_requests = Request.objects.filter(course=obj, status=Request.REQUSET_STATUS_ACCEPTED)
@@ -41,7 +41,7 @@ class InstructorCourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'condition', 'head_TA', 'accepted_students']
+        fields = ['id', 'name', 'semester', 'condition', 'max_TA_number', 'head_TA', 'accepted_students']
         read_only_fields = ['id', 'name', 'semester']
 
     def get_accepted_students(self, obj):
@@ -81,7 +81,7 @@ class AdminCourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor', 'condition', 'head_TA', 'accepted_students']
+        fields = ['id', 'name', 'semester', 'instructor', 'condition', 'max_TA_number', 'head_TA', 'accepted_students']
 
     def get_accepted_students(self, obj):
         accepted_requests = Request.objects.filter(course=obj, status=Request.REQUSET_STATUS_ACCEPTED)
@@ -100,5 +100,5 @@ class SimpleCourseSerializer(StudentCourseSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'semester', 'instructor']
-        read_only_fields = ['id', 'name', 'semester', 'instructor']
+        fields = ['id', 'name', 'semester', 'instructor', 'max_TA_number']
+        read_only_fields = ['id', 'name', 'semester', 'instructor', 'max_TA_number']

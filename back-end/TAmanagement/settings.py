@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'admin_area',
     'course',
     'request',
+    'policy',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME', 'TAmanagement'),
         'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', '47714771Abbas$'),
+        'PASSWORD': os.getenv('DB_PASSWORD', '96247324GHOOLAhhhhReza'),
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '3306'),
     },
