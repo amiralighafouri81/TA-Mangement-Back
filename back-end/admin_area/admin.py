@@ -11,7 +11,7 @@ from core.models import User  # Assuming User model exists in core.models
 
 # Form for bulk uploading instructors
 class BulkInstructorUploadForm(forms.Form):
-    csv_file = forms.FileField(label="CSV File", required=True)
+    csv_file = forms.FileField(label="CSV file", required=True)
 
 # Extend the functionality of the existing InstructorAdmin
 def add_bulk_upload_functionality(admin_class):
@@ -90,7 +90,7 @@ from request.models import Request
 
 # Form for bulk uploading courses
 class BulkCourseUploadForm(forms.Form):
-    csv_file = forms.FileField(label="CSV File", required=True)
+    csv_file = forms.FileField(label="CSV file", required=True)
 
 # Extend the functionality of the existing CourseAdmin
 def add_bulk_upload_functionality_to_course(admin_class):

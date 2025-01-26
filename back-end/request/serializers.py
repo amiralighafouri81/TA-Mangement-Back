@@ -75,7 +75,6 @@ class InstructorRequestSerializer(serializers.ModelSerializer):
         return str(obj.course)
 
 
-
 class AdminRequestSerializer(serializers.ModelSerializer):
     course = SimpleCourseSerializer(read_only=True)
 
