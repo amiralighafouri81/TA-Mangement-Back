@@ -33,7 +33,7 @@ class StudentRequestSerializer(serializers.ModelSerializer):
             raise PermissionDenied("The capacity of teaching assistants is the completion period")
         maximum_number_of_course_for_ta = Policy.objects.filter(key="MaximumNumberOfCourseForTA").first()
         if maximum_number_of_course_for_ta is not None and maximum_number_of_course_for_ta.value <= \
-                Request.objects.filter(student_id=student.id, status=Request.REQUSET_STATUS_ACCEPTED).count():
+                Request.objects.filter(student_id=student.id, status=Request.REQUSET_STATUS_ACCEPTED, course__semester__exact=course.semester).count():
             raise PermissionDenied("student already reach to the maximum number of course for TA")
         return data
 
@@ -73,7 +73,6 @@ class InstructorRequestSerializer(serializers.ModelSerializer):
 
     def get_course(self, obj):
         return str(obj.course)
-
 
 
 class AdminRequestSerializer(serializers.ModelSerializer):

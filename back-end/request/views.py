@@ -101,6 +101,6 @@ class RequestViewSet(ModelViewSet):
                 raise PermissionDenied("The capacity of teaching assistants is the completion period")
             maximum_number_of_course_for_ta = Policy.objects.filter(key="MaximumNumberOfCourseForTA").first()
             if maximum_number_of_course_for_ta is not None and maximum_number_of_course_for_ta.value <= \
-                    Request.objects.filter(student_id=student_id, status=Request.REQUSET_STATUS_ACCEPTED).count():
+                    Request.objects.filter(student_id=student_id, status=Request.REQUSET_STATUS_ACCEPTED, course__semester__exact=course.semester).count():
                 raise PermissionDenied("student already reach to the maximum number of course for TA")
         return super().update(request, *args, **kwargs)
