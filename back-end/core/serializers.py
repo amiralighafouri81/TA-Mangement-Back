@@ -15,7 +15,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
         model = User
         fields = [
             'id', 'first_name', 'last_name', 'username',
-            'student_number', 'password', 'password_confirmation',
+            'student_number', 'password', 'password_confirmation'
         ]
 
     def validate(self, attrs):
