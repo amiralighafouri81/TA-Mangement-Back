@@ -23,6 +23,7 @@ urlpatterns = [
     path('faculty/', include('faculty.urls')),
     path('course/', include('course.urls')),
     path('request/', include('request.urls')),
+    path('policy/', include('policy.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('api/v1/',  # Added trailing slash

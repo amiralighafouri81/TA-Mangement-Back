@@ -2,7 +2,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
+
+from course.models import Course
 from faculty.models import Student, Instructor
+from policy.models import Policy
 from .models import Request
 from .serializers import StudentRequestSerializer, InstructorRequestSerializer, AdminRequestSerializer
 from .pagination import DefaultPagination
@@ -88,4 +91,16 @@ class RequestViewSet(ModelViewSet):
         user = request.user
         if user.role == 'student':
             raise PermissionDenied("Students are not allowed to update requests.")
+        new_status = request.POST.get('status')
+        old_request = get_object_or_404(Request, pk=kwargs['pk'])
+        course = old_request.course
+        student_id = old_request.student_id
+        if new_status == Request.REQUSET_STATUS_ACCEPTED:
+            if course.max_TA_number is not None and \
+                    Request.objects.filter(course_id=course.id).count() >= course.max_TA_number:
+                raise PermissionDenied("The capacity of teaching assistants is the completion period")
+            maximum_number_of_course_for_ta = Policy.objects.filter(key="MaximumNumberOfCourseForTA").first()
+            if maximum_number_of_course_for_ta is not None and maximum_number_of_course_for_ta.value <= \
+                    Request.objects.filter(student_id=student_id, status=Request.REQUSET_STATUS_ACCEPTED, course__semester__exact=course.semester).count():
+                raise PermissionDenied("student already reach to the maximum number of course for TA")
         return super().update(request, *args, **kwargs)

@@ -16,6 +16,7 @@ class Course(models.Model):
         related_name='+'
     )
     condition = models.FloatField(null=True, blank=True)
+    max_TA_number = models.PositiveIntegerField(null=True, blank=True)
 
     def clean(self):
         # Check if the selected head_TA is valid

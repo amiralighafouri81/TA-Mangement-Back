@@ -1,6 +1,10 @@
+from django.http import FileResponse, HttpResponse
+from django.shortcuts import get_object_or_404
+from django.views import View
+from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-from .models import Student, Instructor
+from .models import Student, Instructor, _delete_file
 from rest_framework.exceptions import PermissionDenied
 from .serializers import StudentSerializer, InstructorSerializer
 from django_filters.rest_framework import DjangoFilterBackend
@@ -16,17 +20,63 @@ class StudentViewSet(ModelViewSet):
     filterset_class = StudentFilter
     pagination_class = DefaultPagination
 
-    def get_queryset(self):
+    def get_queryset(self, pk=None):
+
         user = self.request.user
 
-        if user.is_staff:
+        if user.role == 'instructor':
             return Student.objects.all()
-        else:
-            raise PermissionDenied("You do not have permission to see this endpoint.")
+
+        if user.role == 'student':
+            if pk is None:
+                return Student.objects.filter(user=user)
+            else:
+                return Student.objects.filter(id=pk)
+
+        return Student.objects.all()
 
     def get_serializer_context(self):
         return {'request': self.request}
 
+    def destroy(self, request, *args, **kwargs):
+        obj = Student.objects.filter(id=kwargs['pk']).first()
+        old_resume_file = None
+        if obj is not None:
+            old_resume_file = obj.resume_file
+        if old_resume_file is not None and old_resume_file.name is not None and old_resume_file.name != "":
+            raise PermissionDenied("{0}".format(old_resume_file.path))
+            _delete_file(old_resume_file.path)
+
+        raise PermissionDenied("{0}".format(obj))
+
+        return super().destroy(request, *args, **kwargs)
+
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        user = request.user
+        if user.role != 'student':
+            raise PermissionDenied("Students are not allowed to update requests.")
+
+        return super().update(request, *args, **kwargs)
+
+    @action(detail=True, methods=['GET'])
+    def download_file(self, request, pk):
+        resume_file = Student.objects.filter(id=pk).first().resume_file
+        file_path = resume_file.path
+        response = FileResponse(open(file_path, "rb"))
+        return response
+
+    @action(detail=True, methods=['post', 'get'])
+    def remove_resume(self, request, pk):
+        student = Student.objects.filter(id=pk).first()
+        resume_file = student.resume_file
+        if resume_file is not None and resume_file.name is not None and resume_file.name != "":
+            _delete_file(resume_file.path)
+        student.resume_file = None
+        student.save()
+        return HttpResponse("remove_resume", status=200)
 
 
 class InstructorViewSet(ModelViewSet):
