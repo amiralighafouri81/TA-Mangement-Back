@@ -60,7 +60,7 @@ class InstructorViewSet(ModelViewSet):
     def update(self, request, *args, **kwargs):
         # Only allow users with is_staff = True to update the student object
         if not request.user.is_staff:
-            raise PermissionDenied("You do not have permission to delete this object.")
+            raise PermissionDenied("You do not have permission to update this object.")
         # Proceed with the update if user has is_staff = True
         return super().update(request, *args, **kwargs)
 
