@@ -29,7 +29,7 @@ class StudentRequestSerializer(serializers.ModelSerializer):
         if Request.objects.filter(course=course, student=student).exists():
             raise PermissionDenied("You have already made a request for this course.")
         if course.max_TA_number is not None and \
-                Request.objects.filter(course_id=course.id).count() >= course.max_TA_number:
+                Request.objects.filter(course_id=course.id, status=Request.REQUSET_STATUS_ACCEPTED).count() >= course.max_TA_number:
             raise PermissionDenied("The capacity of teaching assistants is the completion period")
         maximum_number_of_course_for_ta = Policy.objects.filter(key="MaximumNumberOfCourseForTA").first()
         if maximum_number_of_course_for_ta is not None and maximum_number_of_course_for_ta.value <= \

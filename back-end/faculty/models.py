@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.core.exceptions import ValidationError
+from rest_framework.exceptions import ValidationError as DRFValidationError
 from core.models import User
 import os
 
@@ -26,11 +26,11 @@ class Student(models.Model):
     def clean(self):
         # Check if the user's role is "student"
         if self.user.role != User.STUDENT:
-            raise ValidationError("User must have a 'Student' role to be added as a Student.")
+            raise DRFValidationError("User must have a 'Student' role to be added as a Student.")
         if not (self.resume_file.name is None or self.resume_file.name == "" or self.resume_file.name.endswith('.pdf')):
-            raise ValidationError("type of file must be pdf {0}".format(self.resume_file.name))
+            raise DRFValidationError("type of file must be pdf {0}".format(self.resume_file.name))
         if self.resume_file.name is not None and self.resume_file.name != "" and self.resume_file.size > 1024 * 1024:
-            raise ValidationError("maximum size of file is 1MB.")
+            raise DRFValidationError("maximum size of file is 1MB.")
 
     def save(self, *args, **kwargs):
         self.clean()  # Validate before saving
@@ -75,7 +75,7 @@ class Instructor(models.Model):
     def clean(self):
         # Check if the user's role is "instructor"
         if self.user.role != User.INSTRUCTOR:
-            raise ValidationError("User must have an 'Instructor' role to be added as an Instructor.")
+            raise DRFValidationError("User must have an 'Instructor' role to be added as an Instructor.")
 
     def save(self, *args, **kwargs):
         self.clean()  # Validate before saving

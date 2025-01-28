@@ -56,8 +56,8 @@ class StudentViewSet(ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         user = request.user
-        if user.role != 'student':
-            raise PermissionDenied("Students are not allowed to update requests.")
+        if user.role == 'instructor':
+            raise PermissionDenied("instructors are not allowed to update students.")
 
         return super().update(request, *args, **kwargs)
 
