@@ -89,21 +89,21 @@ WSGI_APPLICATION = 'TAmanagement.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'TAmanagement'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASSWORD', '96247324GHOOLAhhhhReza'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '3306'),
-    },
-        #'default': {
-        #    'ENGINE': 'django.db.backends.mysql',
-        #    'NAME': 'TAmanagement',
-        #    'HOST' : 'localhost',
-        #    'USER': 'root',
-        #    'PASSWORD': '47714771Abbas$',
-        #},
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': os.getenv('DB_NAME', 'TAmanagement'),
+    #     'USER': os.getenv('DB_USER', 'root'),
+    #     'PASSWORD': os.getenv('DB_PASSWORD', '96247324GHOOLAhhhhReza'),
+    #     'HOST': os.getenv('DB_HOST', 'localhost'),
+    #     'PORT': os.getenv('DB_PORT', '3306'),
+    # },
+        'default': {
+           'ENGINE': 'django.db.backends.mysql',
+           'NAME': 'test',
+           'HOST' : 'localhost',
+           'USER': 'root',
+           'PASSWORD': '47714771Abbas$',
+        },
     #'default': {
     #    'ENGINE': 'django.db.backends.mysql',
     #    'NAME': os.getenv('DB_NAME', 'django_db'),

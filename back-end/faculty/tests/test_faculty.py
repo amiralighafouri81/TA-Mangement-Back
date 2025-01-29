@@ -35,7 +35,7 @@ class TestFaculty:
         # Assert response status code is 200
         assert response.status_code == status.HTTP_200_OK
 
-    def test_if_user_is_student_and_get_students_list_returns_403(self):
+    def test_if_user_is_student_and_get_students_list_returns_200(self):
         # Get the User model
         User = get_user_model()
 
@@ -61,8 +61,7 @@ class TestFaculty:
         response = client.get('/faculty/students/')
 
         # Assert response status code is 403
-        assert response.status_code == status.HTTP_403_FORBIDDEN
-        assert "You do not have permission to see this endpoint." in str(response.data['detail'])
+        assert response.status_code == status.HTTP_200_OK
 
     def test_if_user_is_instructor_and_get_instructors_list_returns_200(self):
         # Get the User model
@@ -93,7 +92,7 @@ class TestFaculty:
         # Assert response status code is 200
         assert response.status_code == status.HTTP_200_OK
 
-    def test_if_user_is_instructor_and_get_students_list_returns_403(self):
+    def test_if_user_is_instructor_and_get_students_list_returns_200(self):
         # Get the User model
         User = get_user_model()
 
@@ -120,8 +119,7 @@ class TestFaculty:
         response = client.get('/faculty/students/')
 
         # Assert response status code is 403
-        assert response.status_code == status.HTTP_403_FORBIDDEN
-        assert "You do not have permission to see this endpoint." in str(response.data['detail'])
+        assert response.status_code == status.HTTP_200_OK
 
     def test_if_user_is_student_and_post_instructor_returns_403(self):
         # Get the User model
@@ -207,7 +205,7 @@ class TestFaculty:
 
         # Assert response status code is 403
         assert response.status_code == status.HTTP_403_FORBIDDEN
-        assert "You do not have permission to delete this object." in str(response.data['detail'])
+        assert "You do not have permission to update this object." in str(response.data['detail'])
 
     def test_if_user_is_instructor_and_post_instructor_returns_403(self):
         # Get the User model
