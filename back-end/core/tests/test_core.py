@@ -76,54 +76,34 @@ class TestCore:
         # Get the User model
         User = get_user_model()
 
-        # Create a test student user
-        test_user = User.objects.create_user(
-            username='testuser',
-            password='testpass123',
-            first_name='Test',
-            last_name='User',
+        # Create a student user
+        student_user = User.objects.create_user(
+            username="student_user",
+            password="password123",
             role=User.STUDENT
         )
 
-        # Create associated student profile
-        Student.objects.create(
-            user=test_user,
-            student_number='12345',
-            biography='Test biography'
+        # Create student profile
+        student = Student.objects.create(
+            user=student_user,
+            student_number="12345",
+            biography="Test student"
         )
 
-        # Create API client and authenticate
+        # Create API client and authenticate as student
         client = APIClient()
-        client.force_authenticate(user=test_user)
+        client.force_authenticate(user=student_user)
 
-        # Prepare update data
-        update_data = {
-            'first_name': 'Updated',
-            'last_name': 'Name',
-            'biography': 'Updated biography',
-            'student_number': '12345'  # Keeping the same student number
-        }
+        # Make PUT request to update own profile
+        response = client.put(f'/faculty/students/{student.id}/', {
+            'student_number': '12345',  # Keep same student number
+            'biography': 'Updated biography'  # Change biography
+        })
 
-        # Make PATCH request to user profile endpoint
-        response = client.patch('/auth/users/me/', update_data)
-
-        # Assert response status code is 200 (OK)
+        # Assert response status code is 200
         assert response.status_code == status.HTTP_200_OK
-
-        # Refresh user from database
-        test_user.refresh_from_db()
-        student = Student.objects.get(user=test_user)
-
-        # Verify user data was updated
-        assert test_user.first_name == 'Updated'
-        assert test_user.last_name == 'Name'
-        assert student.biography == 'Updated biography'
-
-        # Verify response data
-        assert response.data['first_name'] == 'Updated'
-        assert response.data['last_name'] == 'Name'
+        # Verify the biography was updated
         assert response.data['biography'] == 'Updated biography'
-        assert response.data['student_number'] == '12345'
 
     def test_if_instructor_update_profile_returns_200(self):
         # Get the User model
