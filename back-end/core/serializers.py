@@ -43,6 +43,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 class UserSerializer(BaseUserSerializer):
     student_number = serializers.CharField(required=False, allow_null=True)
     biography = serializers.CharField(required=False, allow_null=True)
+    resume_file = serializers.FileField(required=False, allow_null=True)
     staff_id = serializers.CharField(required=False, allow_null=True)
     way_of_communication = serializers.CharField(required=False, allow_null=True)
     research_fields = serializers.CharField(required=False, allow_null=True)
@@ -50,7 +51,7 @@ class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
         fields = [
             'username', 'first_name', 'last_name', 'role',  # Base fields
-            'student_number', 'biography',  # Student fields
+            'student_number', 'biography', 'resume_file',  # Student fields
             'staff_id', 'way_of_communication', 'research_fields'  # Instructor fields
         ]
         read_only_fields = ['role']
@@ -70,6 +71,8 @@ class UserSerializer(BaseUserSerializer):
                 # Remove student-specific fields
                 self.fields.pop('student_number', None)
                 self.fields.pop('biography', None)
+                self.fields.pop('resume_file', None)
+
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
@@ -80,11 +83,13 @@ class UserSerializer(BaseUserSerializer):
                 representation.update({
                     'student_number': student.student_number,
                     'biography': student.biography,
+                    'resume_file': None if student.resume_file is None else student.resume_file.name,
                 })
             except Student.DoesNotExist:
                 representation.update({
                     'student_number': None,
                     'biography': None,
+                    'resume_file': None,
                 })
 
         elif instance.role == User.INSTRUCTOR:
@@ -114,6 +119,7 @@ class UserSerializer(BaseUserSerializer):
             student_data = {
                 'student_number': validated_data.get('student_number'),
                 'biography': validated_data.get('biography'),
+                'resume_file': validated_data.get('resume_file'),
             }
             student, created = Student.objects.get_or_create(user=instance)
             for field, value in student_data.items():
@@ -145,6 +151,15 @@ class UserSerializer(BaseUserSerializer):
             if 'student_number' in attrs and attrs['student_number'] != (student.student_number if student else None):
                 if Student.objects.filter(student_number=attrs['student_number']).exclude(user=self.instance).exists():
                     raise DRFValidationError({"student_number": "A student with that student number already exists."})
+
+            if not ('resume_file' in attrs and attrs['resume_file'] is None or
+                    attrs['resume_file'].name == "" or attrs['resume_file'].name.endswith(
+                    '.pdf')):
+                raise DRFValidationError("type of file must be pdf {0}")
+
+            if 'resume_file' in attrs and attrs['resume_file'] is not None and attrs['resume_file'].name != "" and\
+                    attrs['resume_file'].size > 1024 * 1024:
+                raise DRFValidationError("maximum size of file is 1MB.")
 
         elif role == User.INSTRUCTOR:
             instructor = Instructor.objects.filter(user=self.instance).first()
